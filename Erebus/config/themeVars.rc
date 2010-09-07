@@ -1,0 +1,140 @@
+; ------------------------------------------------------
+;
+;  [ Theme     ] : Erebus
+;  [ Author    ] : Andrew Fricke (Anomareh)
+;  [ Website   ] : http://www.mirroredwhite.com/
+;  [ Source    ] : http://github.com/Anomareh/Erebus-LS
+;  [ Thanks To ] : Greywool and alurcard2 in #litestep
+;                  Everyone I pestered in #pixelfuckers
+;
+; ------------------------------------------------------
+
+
+; ----------------
+;  [ Theme Vars ]
+; ----------------
+
+; ------------
+;  [ Colors ]
+; ------------
+
+erbWhite						FFFFFF
+erbLightOrange					E29F64
+erbOrange						FF7700
+erbLightRed						C48383
+erbRed							FF5E5E
+erbPink							E698D3
+
+
+; ---------------------
+;  [ Global Settings ]
+; ---------------------
+
+; NOTE: "shadows" or "noshadows"
+erbShadows						"shadows"
+
+
+; --------------------
+;  [ Popup Settings ]
+; --------------------
+
+erbPopupColor					$erbLightRed$
+erbPopupColorActive				$erbRed$
+
+; NOTE: 1 = "Space"   21 height
+;       2 = "Line"    16 height
+;       3 = "akka"    16 height
+erbPopupSeparatorStyle			"1"
+erbPopupSeparatorHeight			21
+
+
+; ----------------------
+;  [ Taskbar Settings ]
+; ----------------------
+
+erbTaskbarColor					$erbLightRed$
+erbTaskbarColorActive			$erbRed$
+erbTaskbarColorHover			$erbPink$
+erbTaskbarColorFlashing			$erbPink$
+
+
+; -----------------------
+;  [ Sys Tray Settings ]
+; -----------------------
+
+erbSysTraySaturation			0
+erbSysTrayHoverSaturation		100
+
+
+; ---------------------------
+;  [ Global Label Settings ]
+; ---------------------------
+
+erbLabelColor					$erbWhite$
+
+
+; -------------------------
+;  [ Start Menu Settings ]
+; -------------------------
+
+erbStartMenuColor				$erbLightRed$
+erbStartMenuColorActive			$erbRed$
+
+
+; --------------------------
+;  [ LSX Command Settings ]
+; --------------------------
+
+erbCommandColor					$erbWhite$
+
+
+; ------------------------
+;  [ Album Art Settings ]
+; ------------------------
+
+erbAlbumArtEnabled				true
+
+erbAlbumArtArtistColor			$erbRed$
+erbAlbumArtTitleColor			$erbLightRed$
+
+erbAlbumArtCoverName			"Cover.jpg"
+
+
+; ---------------------------
+;  [ Stat Widgets Settings ]
+; ---------------------------
+
+erbStatsStartHidden				false
+
+;  [ Net Stats Settings ]
+; ------------------------
+
+erbNetColor						$erbLightRed$
+
+erbNetInScale					5000
+erbNetOutScale					1000
+
+;  [ Weather Settings ]
+; ----------------------
+
+erbWeatherDayColor				$erbLightRed$
+erbWeatherTempColor				$erbRed$
+
+; NOTE: To find your WOEID, visit: http://weather.yahoo.com/
+;
+;       Enter your city or zip code.
+;
+;       You should be taken to a link like such:
+;       http://weather.yahoo.com/<country>/<state>/<city>-<woeid>/
+;
+;       Simply grab the WOEID and enter it below.
+
+erbWeatherWOEID					<FIND YOUR WOEID AS DESCRIBED ABOVE AND ENTER IT HERE>
+erbWeatherURL					http://weather.yahooapis.com/forecastrss?w=$erbWeatherWOEID$
+
+
+; -----------------
+;  [ DO NOT EDIT ]
+; -----------------
+
+erbSysTrayShown					false

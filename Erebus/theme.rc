@@ -1,0 +1,745 @@
+; ------------------------------------------------------
+;
+;  [ Theme     ] : Erebus
+;  [ Author    ] : Andrew Fricke (Anomareh)
+;  [ Website   ] : http://www.mirroredwhite.com/
+;  [ Source    ] : http://github.com/Anomareh/Erebus-LS
+;  [ Thanks To ] : Greywool and alurcard2 in #litestep
+;                  Everyone I pestered in #pixelfuckers
+;
+; ------------------------------------------------------
+
+
+; ---------------------
+;  [ Erebus LiteStep ]
+; ---------------------
+
+ThemeName									"Erebus"
+ThemeAuthor									"Andrew Fricke (Anomareh)"
+
+OTSMajorVersion								2
+OTSMinorVersion								0
+
+ConfigDir									"$ThemeDir$config\"
+CacheDir									"$ThemeDir$cache\"
+LSImageFolder								"$ThemeDir$images\$erbShadows$\"
+
+Include										"$ConfigDir$themeVars.rc"
+
+
+; -------------
+;  [ Modules ]
+; -------------
+
+*NetLoadModuleSite							"http://www.ls-themes.org/modules/download/"
+*NetLoadModuleSite							"http://www.ls-universe.ls-themes.org/modules/"
+*NetLoadModuleSite							"http://www.modules.shellfront.org/"
+
+*NetLoadModule								xpaintclass-1.0
+*NetLoadModule								xstatsclass-1.1.5
+
+
+*NetLoadModule								jdesk-0.75
+*NetLoadModule								xpopup-2.1
+*NetLoadModule								xtray-2.2.2
+*NetLoadModule								xtaskbar-2.3.2
+*NetLoadModule								xstatsgraph-0.8.1
+*NetLoadModule								xlabel-4.3
+*NetLoadModule								wazup-1.35
+*NetLoadModule								albumart-1.6
+*NetLoadModule								lsxcommand-2.0.2
+*NetLoadModule								zorder-0.2
+*NetLoadModule								mzscript-1.0.3
+
+
+; ----------------
+;  [ MZ Scripts ]
+; ----------------
+
+*mzVarFile "$ConfigDir$themeVars.rc"
+
+;  [ Shortcut Bang For Setting Vars ]
+; ------------------------------------
+*Script bang !erbSetOption
+	*Script exec !varSet %{args:1} %{args:2}
+	*Script exec !varSave %{args:1}
+*Script ~bang
+
+;  [ Sys Tray Fix ]
+; ------------------
+*Script bang !erbResizeSysTray
+	*Script exec !if [%{erbSysTrayShown} = true][!xTaskbarRefresh xTaskbarBorders 10 %#xTrayCurrentWidth-3%# 8 0]
+*Script ~bang
+
+;  [ Start Menu Behavior Fix ]
+; -----------------------------
+*Script bang !erbShowStartMenu
+	*Script exec !Execute [!LabelShow erbStartMenu][!Pause 400][!CommandShow][!CommandFocus]
+*Script ~bang
+
+*Script bang !erbHideStartMenu
+	*Script exec !Execute [!CommandHide][!LabelHide erbStartMenu]
+*Script ~bang
+
+*Script bang !erbToggleStartMenu
+	*Script exec !if ["%#erbStartMenuVisible%#" = false][!if [%{args:1} = "btn"][!erbShowStartMenu]][!if [%{args:1} = "cmd"][!erbHideStartMenu]]
+*Script ~bang
+
+;  [ Display Album Art ]
+; -----------------------
+*Script bang !erbShowAlbumArt
+	*Script exec !if ["%#erbAlbumArtPath%#" <> "$LSImageFolder$noCover.jpg"][!Execute [!LabelRefresh erbAlbumArtCover erbAlbumArtCoverImage "%#erbAlbumArtPath%#"][!LabelShow erbAlbumArtBack][!LabelSetAlpha erbAlbumArtCover 255 10 10]]
+*Script ~bang
+
+*Script bang !erbHideAlbumArt
+	*Script exec !Execute [!LabelHide erbAlbumArtCover][!LabelHide erbAlbumArtBack][!Pause 2000][!LabelSetAlpha erbAlbumArtCover 0][!LabelShow erbAlbumArtCover]
+*Script ~bang
+
+*Script bang !erbUpdateAlbumArt
+	*Script exec !if ["%#erbAlbumArtPath%#" = "$LSImageFolder$noCover.jpg"][!if [%{erbAlbumArtEnabled} = true][!erbHideAlbumArt]][!if [%{erbAlbumArtEnabled} = true][!erbShowAlbumArt]]
+*Script ~bang
+
+*Script bang !erbToggleAlbumArt
+	*Script exec !if [%{erbAlbumArtEnabled} = true][!Execute [!VarSet erbAlbumArtEnabled false][!erbHideAlbumArt]][!Execute [!VarSet erbAlbumArtEnabled true][!erbShowAlbumArt]]
+*Script ~bang
+
+;  [ Display Weather ]
+; ---------------------
+
+;  NOTE: Args
+;        1 = Now Temp
+;        2 = Now Code
+;        3 = Today
+;        4 = Today Temp
+;        5 = Today Code
+;        6 = Tomorrow
+;        7 = Tomorrow Temp
+;        8 = Tomorrow Code
+
+*Script bang !erbUpdateWeather
+	*Script exec !Execute [!SetEvar erbWeather1IconImage "icons/weather/%{args:2}.png"][!SetEvar erbWeather1TempText "%{args:1}"][!SetEvar erbWeather2DayText "%{args:3}"][!SetEvar erbWeather2IconImage "icons/weather/%{args:5}.png"][!SetEvar erbWeather2TempText "%{args:4}"][!SetEvar erbWeather3DayText "%{args:6}"][!SetEvar erbWeather3IconImage "icons/weather/%{args:8}.png"][!Pause 400][!LabelRefresh erbWeather erbWeather3TempText "%{args:7}"]
+*Script ~bang
+
+
+; --------------
+;  [ Includes ]
+; --------------
+
+Include										"$ConfigDir$themePopup.rc"
+
+
+; -------------
+;  [ Desktop ]
+; -------------
+
+jDeskWorkArea								"10,44,-10,-10"
+jDeskDesktopFolder							"$Desktop$"
+jDeskRecycleOnRezChange						true
+
+*jDeskMButton3								[.none;!None;!PopupErebusConfig;!None]
+
+
+; -------------
+;  [ Taskbar ]
+; -------------
+
+xTaskbarX									63
+xTaskbarY									7
+xTaskbarBorders								10 10 8 0
+
+xTaskbarWidth								$ResolutionX-216$
+xTaskbarHeight								33
+
+xTaskbarAlphaMap							true
+xTaskbarShowIcon							false
+xTaskbarShowHoverState						true
+xTaskbarShowActiveState						true
+xTaskbarUseFlashingState					true
+
+xTaskbarFont								"Semplice Regular"
+xTaskbarFontBorders							15 15 0 2
+xTaskbarFontHeight							13
+xTaskbarFontAlign							".left"
+xTaskbarFontColor							$erbTaskbarColor$
+xTaskbarFontClearType						false
+xTaskbarHoverFontColor						$erbTaskbarColorHover$
+xTaskbarUseHoverFontSettings				true
+xTaskbarActiveFontColor						$erbTaskbarColorActive$
+xTaskbarUseActiveFontSettings				true
+xTaskbarFlashingFontColor					$erbTaskbarColorFlashing$
+
+xTaskbarPaintingMode						".image"
+xTaskbarImage								"taskbar.png"
+xTaskbarImageEdges							20 20 0 0
+
+xTaskbarButtonXSpacing						-5
+xTaskbarButtonMaxWidth						175
+xTaskbarButtonMaxHeight						18
+
+xTaskbarButtonPaintingMode					".image"
+xTaskbarButtonImage							"taskbarButton.png"
+xTaskbarButtonImageEdges					10 8 0 0
+
+xTaskbarHoverButtonPaintingMode				".image"
+xTaskbarHoverButtonImage					"taskbarButtonHover.png"
+xTaskbarHoverButtonImageEdges				10 8 0 0
+
+xTaskbarShowTooltip							false
+
+xTaskbarOnMiddleClickButton					".close"
+
+
+; --------------
+;  [ Sys Tray ]
+; --------------
+
+xTrayX										-158
+xTrayY										5
+xTrayBorders								23 27 11 10
+
+xTrayAutoSize								20 10
+
+xTrayAlphaMap								true
+
+xTrayLayout									".horizontal"
+xTrayDirection								".left"
+xTrayXSpacing								2
+
+xTrayPaintingMode							".image"
+xTrayImage									"sysTray.png"
+xTrayImageEdges								23 27 0 0
+
+xTrayIconSize								16
+xTrayIconSaturationIntensity				$erbSysTraySaturation$
+
+xTrayHoverIconSaturationIntensity			$erbSysTrayHoverSaturation$
+
+xTrayOnShow									!Execute [!ParseEvars !xTaskbarRefresh xTaskbarBorders 10 %#xTrayCurrentWidth-3%# 8 0][!VarSet erbSysTrayShown true]
+xTrayOnHide									!Execute [!xTaskbarRefresh xTaskbarBorders 10 10 8 0][!VarSet erbSysTrayShown false]
+xTrayOnResize								!erbResizeSysTray
+
+xTrayCustomAlphaFade						10 10
+xTrayAlwaysOnTop							true
+xTrayStartHidden							true
+
+
+; -----------
+;  [ Popup ]
+; -----------
+
+xPopupTopBorder								14
+xPopupBottomBorder							14
+
+xPopupMinWidth								108
+xPopupEntryHeight							17
+xPopupSeparatorHeight						$erbPopupSeparatorHeight$
+
+xPopupAlphaMap								true
+xPopupShowIcon								false
+xPopupShowCaption							".none"
+
+xPopupFont									"Semplice Regular"
+xPopupFontBorders							14 28 0 2
+xPopupFontHeight							13
+xPopupFontColor								$erbPopupColor$
+xPopupActiveEntryFontColor					$erbPopupColorActive$
+xPopupFontClearType							false
+
+xPopupPaintingMode							".image"
+xPopupImage									"popup/popup.png"
+xPopupImageEdges							9 9 14 14
+
+xPopupEntryPaintingMode						".image"
+xPopupEntryImage							"popup/popupEntry.png"
+xPopupEntryImageEdges						8 8 0 0
+
+xPopupActiveEntryPaintingMode				".image"
+xPopupActiveEntryImage						"popup/popupEntryActive.png"
+xPopupActiveEntryImageEdges					12 12 0 0
+
+xPopupFolderPaintingMode					".image"
+xPopupFolderImage							"popup/popupFolder.png"
+xPopupFolderImageEdges						8 16 0 0
+
+xPopupActiveFolderPaintingMode				".image"
+xPopupActiveFolderImage						"popup/popupFolderActive.png"
+xPopupActiveFolderImageEdges				12 16 0 0
+
+xPopupSeparatorPaintingMode					".image"
+xPopupSeparatorImage						"popup/popupSeparator$erbPopupSeparatorStyle$.png"
+xPopupSeparatorImageEdges					12 12 0 0
+
+xPopupAlwaysOnTop							true
+
+
+; -----------------
+;  [ LSX Command ]
+; -----------------
+
+CommandX									21
+CommandY									222
+
+CommandWidth								117
+CommandHeight								13
+
+CommandTransparentEditBox					true
+
+CommandFont									"Semplice Regular"
+CommandMarginLeft							100
+CommandFontHeight							13
+CommandFontColor							$erbCommandColor$
+
+CommandPaintingMode							".image"
+CommandImage								"run.jpg"
+
+CommandAlwaysOnTop							true
+CommandStartHidden							true
+
+CommandOnUnfocus							!erbToggleStartMenu "cmd"
+
+
+; -------------------
+;  [ Label Configs ]
+; -------------------
+
+;  [ Global ]
+; ------------
+GlobalFont									"Semplice Regular"
+GlobalFontHeight							13
+GlobalFontAlign								".left"
+GlobalFontColor								$erbLabelColor$
+GlobalFontClearType							false
+
+;  [ Start Menu Items ]
+; ----------------------
+erbStartMenuGroupFontColor					$erbStartMenuColor$
+erbStartMenuGroupHoverFontColor				$erbStartMenuColorActive$
+erbStartMenuGroupPaintingMode				".image"
+
+;  [ Weather ]
+; -------------
+;    [ Days  ]
+erbWeatherDayGroupFontAlign					".left"
+erbWeatherDayGroupFontColor					$erbWeatherDayColor$
+erbWeatherDayGroupText						"??"
+erbWeatherDayGroupOnLeftClick				!Execute ["$Browser$" http://weather.yahoo.com/country/state/city-$erbWeatherWOEID$/]
+;    [ Icons ]
+erbWeatherIconGroupPaintingMode				".image"
+erbWeatherIconGroupImage					"icons/weather/3200.png"
+erbWeatherIconGroupOnLeftClick				!Execute ["$Browser$" http://weather.yahoo.com/country/state/city-$erbWeatherWOEID$/]
+;    [ Temps ]
+erbWeatherTempGroupFontAlign				".left"
+erbWeatherTempGroupFontColor				$erbWeatherTempColor$
+erbWeatherTempGroupText						"??"
+erbWeatherTempGroupOnLeftClick				!Execute ["$Browser$" http://weather.yahoo.com/country/state/city-$erbWeatherWOEID$/]
+
+
+; ------------------
+;  [ Start Button ]
+; ------------------
+
+*Label										erbStartButton
+
+erbStartButtonX								8
+erbStartButtonY								7
+
+erbStartButtonWidth							67
+erbStartButtonHeight						33
+
+erbStartButtonAlphaMap						true
+
+erbStartButtonPaintingMode					".image"
+erbStartButtonImage							"startButton.png"
+
+erbStartButtonHoverImagePaintingMode		".image"
+erbStartButtonHoverImage					"startButtonHover.png"
+
+erbStartButtonOnLeftClickDown				!erbToggleStartMenu "btn"
+erbStartButtonOnRightClick					!xTaskbarMinimizeAll
+
+
+; ----------------
+;  [ Start Menu ]
+; ----------------
+
+*Label										erbStartMenu
+
+erbStartMenuX								7
+erbStartMenuY								38
+
+erbStartMenuWidth							145
+erbStartMenuHeight							211
+
+erbStartMenuAlphaMap						true
+
+erbStartMenuPaintingMode					".image"
+erbStartMenuImage							"startMenu.png"
+
+erbStartMenuCustomAlphaFade					10 10
+erbStartMenuAlwaysOnTop						true
+erbStartMenuStartHidden						true
+
+
+; ----------------------
+;  [ Start Menu Items ]
+; ----------------------
+
+;  [ Menu Item 1 ]
+; -----------------
+*erbStartMenuOverlayLabel					23 22 92 23 erbStartMenu1 #s
+erbStartMenu1AddToGroup						erbStartMenuGroup
+erbStartMenu1FontBorders					33 0 0 3
+erbStartMenu1Text							"My Computer"
+erbStartMenu1Image							"icons/myComputer.jpg"
+erbStartMenu1OnLeftClickDown				"$FileManager$" "$Drives$"
+
+;  [ Menu Item 2 ]
+; -----------------
+*erbStartMenuOverlayLabel					23 51 92 23 erbStartMenu2 #s
+erbStartMenu2AddToGroup						erbStartMenuGroup
+erbStartMenu2FontBorders					33 0 0 1
+erbStartMenu2Text							"Control Panel"
+erbStartMenu2Image							"icons/controlPanel.jpg"
+erbStartMenu2OnLeftClickDown				"$FileManager$" "$Controls$"
+
+;  [ Menu Item 3 ]
+; -----------------
+*erbStartMenuOverlayLabel					23 81 92 23 erbStartMenu3 #s
+erbStartMenu3AddToGroup						erbStartMenuGroup
+erbStartMenu3FontBorders					33 0 0 1
+erbStartMenu3Text							"Volume"
+erbStartMenu3Image							"icons/volume.jpg"
+erbStartMenu3OnLeftClickDown				"mmsys.cpl"
+
+;  [ Menu Item 4 ]
+; -----------------
+*erbStartMenuOverlayLabel					23 112 92 23 erbStartMenu4 #s
+erbStartMenu4AddToGroup						erbStartMenuGroup
+erbStartMenu4FontBorders					33 0 0 1
+erbStartMenu4Text							"Recycle Bin"
+erbStartMenu4Image							"icons/recycleBin.jpg"
+erbStartMenu4OnLeftClickDown				"$FileManager$" "$BitBucket$"
+
+;  [ Menu Item 5 ]
+; -----------------
+*erbStartMenuOverlayLabel					23 141 92 24 erbStartMenu5 #s
+erbStartMenu5AddToGroup						erbStartMenuGroup
+erbStartMenu5FontBorders					33 0 0 0
+erbStartMenu5Text							"Shutdown"
+erbStartMenu5Image							"icons/shutdown.jpg"
+erbStartMenu5OnLeftClickDown				!Shutdown
+
+
+; -----------
+;  [ Clock ]
+; -----------
+
+*Label										erbClock
+
+erbClockX									-163
+erbClockY									7
+
+erbClockWidth								155
+erbClockHeight								33
+
+erbClockAlphaMap							true
+
+erbClockFontAlign							".center"
+erbClockFontBorders							21 36 0 1
+
+erbClockPaintingMode						".image"
+erbClockImage								"clock.png"
+erbClockImageEdges							21 36 0 0
+erbClockText								"[time('h')]<font color=#$erbLightRed$>:</font>[time('nn')] <font color=#$erbLightRed$>[time('AM/PM')]</font> <font color=#$erbRed$>¬</font> <font color=#$erbLightRed$>[date('ddd')]</font> [date('mm')]<font color=#$erbLightRed$>/</font>[date('dd')]"
+
+*erbClockOnLeftClickRegion					10 3 109 27 !xTrayToggle
+*erbClockOnLeftClickRegion					119 6 22 21 !Execute [!LabelToggle erbWeather][!LabelToggle erbNet][!xStatsGraphToggle erbNetOutGraph][!xStatsGraphToggle erbNetInGraph]
+*erbClockOnRightClickRegion					119 6 22 21 !erbToggleAlbumArt
+
+
+; ---------------
+;  [ Album Art ]
+; ---------------
+
+*AlbumArt									erbAlbumArt
+
+erbAlbumArtParsePath						"$CacheDir$cover.jpg"
+erbAlbumArtNoArtPath						"noCover.jpg"
+*erbAlbumArtCoverName						$erbAlbumArtCoverName$
+*erbAlbumArtCoverParseType					"CoverFront"
+erbAlbumArtSearchFolderBeforeTag			true
+
+erbAlbumArtOnChange							!erbUpdateAlbumArt
+
+;  [ Label ]
+; -----------
+;    [ Back  ]
+*Label										erbAlbumArtBack
+
+erbAlbumArtBackX							7
+erbAlbumArtBackY							$ResolutionY-158$
+
+erbAlbumArtBackWidth						151
+erbAlbumArtBackHeight						151
+
+erbAlbumArtBackAlphaMap						true
+
+erbAlbumArtBackPaintingMode					".image"
+erbAlbumArtBackImage						"albumArt.png"
+
+erbAlbumArtBackCustomAlphaFade				10 10
+erbAlbumArtBackStartHidden					true
+
+;    [ Cover ]
+*Label										erbAlbumArtCover
+
+erbAlbumArtCoverX							22
+erbAlbumArtCoverY							$ResolutionY-143$
+
+erbAlbumArtCoverWidth						121
+erbAlbumArtCoverHeight						121
+
+erbAlbumArtCoverAlphaMap					true
+
+erbAlbumArtCoverPaintingMode				".image"
+erbAlbumArtCoverImageMode					".stretch_Quadratic"
+erbAlbumArtCoverImage						"noCover.jpg"
+
+erbAlbumArtCoverAlphaTransparency			0
+erbAlbumArtCoverCustomAlphaFade				10 10
+
+erbAlbumArtCoverOnEnter						!LabelShow erbAlbumArtInfo
+erbAlbumArtCoverOnLeave						!LabelHide erbAlbumArtInfo
+
+;    [ Info  ]
+*Label										erbAlbumArtInfo
+
+erbAlbumArtInfoX							22
+erbAlbumArtInfoY							$ResolutionY-143$
+
+erbAlbumArtInfoWidth						121
+erbAlbumArtInfoHeight						121
+
+erbAlbumArtInfoAlphaMap						true
+
+erbAlbumArtInfoCustomAlphaFade				10 10
+erbAlbumArtInfoStartHidden					true
+
+;      [ Artist ]
+*erbAlbumArtInfoOverlayLabel				1 1 119 15 erbAlbumArtArtist #a
+
+erbAlbumArtArtistAlphaMap					true
+
+erbAlbumArtArtistFontAlign					".center"
+erbAlbumArtArtistFontColor					$erbAlbumArtArtistColor$
+
+erbAlbumArtArtistPaintingMode				".image"
+erbAlbumArtArtistImage						"albumArtInfo.png"
+erbAlbumArtArtistText						"[winampArtist('Not Available')]"
+
+;      [ Title  ]
+*erbAlbumArtInfoOverlayLabel				1 -16 119 15 erbAlbumArtTitle #a
+
+erbAlbumArtTitleAlphaMap					true
+
+erbAlbumArtTitleFontAlign					".center"
+erbAlbumArtTitleFontColor					$erbAlbumArtTitleColor$
+
+erbAlbumArtTitlePaintingMode				".image"
+erbAlbumArtTitleImage						"albumArtInfo.png"
+erbAlbumArtTitleText						"[beforeLast(beforeLast(beforeLast(beforeLast(winampTitle('Unknown'), ' (Ft.'), ' (ft.'), ' (feat.'), ' (Feat.')]"
+
+
+; ---------------
+;  [ Net Stats ]
+; ---------------
+
+*Label										erbNet
+
+erbNetX										-374
+erbNetY										-76
+
+erbNetWidth									191
+erbNetHeight								69
+
+erbNetAlphaMap								true
+
+erbNetPaintingMode							".image"
+erbNetImage									"net.png"
+
+erbNetCustomAlphaFade						10 10
+erbNetStartHidden							$erbStatsStartHidden$
+
+;  [ Net Out ]
+; -------------
+;    [ Label        ]
+*erbNetOverlayLabel							105 24 40 9 erbNetOut #s
+erbNetOutFontAlign							".right"
+erbNetOutFontColor							$erbNetColor$
+erbNetOutText								"[before(netout(), '.')]k"
+
+;    [ Graph        ]
+*xStatsGraph								erbNetOutGraph
+
+erbNetOutGraphAlphaMap						true
+
+erbNetOutGraphX								-354
+erbNetOutGraphY								-62
+
+erbNetOutGraphWidth							92
+erbNetOutGraphHeight						19
+
+erbNetOutGraphStartHidden					$erbStatsStartHidden$
+
+;    [ Graph Source ]
+*erbNetOutGraphSource						erbNetOutGraphSource
+
+erbNetOutGraphSourceSource					xStatsClass
+erbNetOutGraphSourceSourceString			"[netout()]"
+
+;    [ Graph Meter  ]
+*erbNetOutGraphMeter						erbNetOutGraphMeter
+
+erbNetOutGraphMeterWidth					92
+erbNetOutGraphMeterHeight					19
+
+erbNetOutGraphMeterSource					erbNetOutGraphSource
+erbNetOutGraphMeterScale					$erbNetOutScale$
+
+erbNetOutGraphMeterRenderMode				FillAndStroke
+erbNetOutGraphMeterFillMode					LinearGradient
+erbNetOutGraphMeterFillGradientP1Color		262626
+erbNetOutGraphMeterFillGradientP2Color		1A1A1A
+erbNetOutGraphMeterStrokeColor				383838
+
+erbNetOutGraphMeterOrientation				Horizontal
+
+;  [ Net In ]
+; ------------
+;    [ Label        ]
+*erbNetOverlayLabel							105 34 40 9 erbNetIn #s
+erbNetInFontAlign							".right"
+erbNetInFontColor							$erbNetColor$
+erbNetInText								"[before(netin(), '.')]k"
+
+;    [ Graph        ]
+*xStatsGraph								erbNetInGraph
+
+erbNetInGraphAlphaMap						true
+
+erbNetInGraphX								-354
+erbNetInGraphY								-40
+
+erbNetInGraphWidth							92
+erbNetInGraphHeight							19
+
+erbNetInGraphStartHidden					$erbStatsStartHidden$
+
+;    [ Graph Source ]
+*erbNetInGraphSource						erbNetInGraphSource
+
+erbNetInGraphSourceSource					xStatsClass
+erbNetInGraphSourceSourceString				"[netin()]"
+
+;    [ Graph Meter  ]
+*erbNetInGraphMeter							erbNetInGraphMeter
+
+erbNetInGraphMeterWidth						92
+erbNetInGraphMeterHeight					19
+
+erbNetInGraphMeterSource					erbNetInGraphSource
+erbNetInGraphMeterScale						$erbNetInScale$
+
+erbNetInGraphMeterRenderMode				FillAndStroke
+erbNetInGraphMeterFillMode					LinearGradient
+erbNetInGraphMeterFillGradientP1Color		1A1A1A
+erbNetInGraphMeterFillGradientP2Color		262626
+erbNetInGraphMeterStrokeColor				383838
+
+erbNetInGraphMeterOrientation				Horizontal
+erbNetInGraphMeterFlipY						true
+
+
+; -------------
+;  [ Weather ]
+; -------------
+
+*Label										erbWeather
+
+erbWeatherX									-210
+erbWeatherY									-76
+
+erbWeatherWidth								203
+erbWeatherHeight							69
+
+erbWeatherAlphaMap							true
+
+erbWeatherPaintingMode						".image"
+erbWeatherImage								"weather.png"
+
+erbWeatherCustomAlphaFade					10 10
+erbWeatherStartHidden						$erbStatsStartHidden$
+
+erbWeatherOnLeftClick						!Execute ["$Browser$" http://weather.yahoo.com/country/state/city-$erbWeatherWOEID$/]
+
+;  [ Now ]
+; ---------
+;    [ Day  ]
+*erbWeatherOverlayLabel						170 24 23 9 erbWeather1Day #s
+erbWeather1DayAddToGroup					erbWeatherDayGroup
+erbWeather1DayText							"Now"
+;    [ Icon ]
+*erbWeatherOverlayLabel						141 22 25 25 erbWeather1Icon #as
+erbWeather1IconAddToGroup					erbWeatherIconGroup
+;    [ Temp ]
+*erbWeatherOverlayLabel						170 34 23 9 erbWeather1Temp #s
+erbWeather1TempAddToGroup					erbWeatherTempGroup
+
+;  [ Today ]
+; -----------
+;    [ Day  ]
+*erbWeatherOverlayLabel						118 24 23 9 erbWeather2Day #s
+erbWeather2DayAddToGroup					erbWeatherDayGroup
+;    [ Icon ]
+*erbWeatherOverlayLabel						89 22 25 25 erbWeather2Icon #as
+erbWeather2IconAddToGroup					erbWeatherIconGroup
+;    [ Temp ]
+*erbWeatherOverlayLabel						118 34 23 9 erbWeather2Temp #s
+erbWeather2TempAddToGroup					erbWeatherTempGroup
+
+;  [ Tomorrow ]
+; --------------
+;    [ Day  ]
+*erbWeatherOverlayLabel						66 24 23 9 erbWeather3Day #s
+erbWeather3DayAddToGroup					erbWeatherDayGroup
+;    [ Icon ]
+*erbWeatherOverlayLabel						37 22 25 25 erbWeather3Icon #as
+erbWeather3IconAddToGroup					erbWeatherIconGroup
+;    [ Temp ]
+*erbWeatherOverlayLabel						66 34 23 9 erbWeather3Temp #s
+erbWeather3TempAddToGroup					erbWeatherTempGroup
+
+;  [ Wazup Config ]
+; ------------------
+*Wazup										erbWeatherRSS
+
+erbWeatherRSSURL							$erbWeatherURL$
+
+erbWeatherRSSEnabled						true
+erbWeatherRSSSilent							true
+erbWeatherRSSUpdateInterval					7200
+
+erbWeatherRSSInputString					"<yweather:condition{*}code={%quote}{%}{%quote}{*}temp={%quote}{%}{%quote}{*}<yweather:forecast{*}day={%quote}{%}{%quote}{*}high={%quote}{%}{%quote}{*}code={%quote}{%}{%quote}{*}<yweather:forecast{*}day={%quote}{%}{%quote}{*}high={%quote}{%}{%quote}{*}code={%quote}{%}{%quote}"
+
+erbWeatherRSSOnChecked						!WazupParseCommand erbWeatherRSS !erbUpdateWeather "{%2}" "{%1}" "{%3}" "{%4}" "{%5}" "{%6}" "{%7}" "{%8}"
+
+
+; -------------
+;  [ Z-order ]
+; -------------
+
+zOrderParentHack							true
+
+*zOrder										xStatsGraph erbNetOutGraph
+*zOrder										xStatsGraph erbNetInGraph
+*zOrder										xLabel erbNet

@@ -1,0 +1,71 @@
+; ------------------------------------------------------
+;
+;  [ Theme     ] : Erebus
+;  [ Author    ] : Andrew Fricke (Anomareh)
+;  [ Website   ] : http://www.mirroredwhite.com/
+;  [ Source    ] : http://github.com/Anomareh/Erebus-LS
+;  [ Thanks To ] : Greywool and alurcard2 in #litestep
+;                  Everyone I pestered in #pixelfuckers
+;
+; ------------------------------------------------------
+
+
+; -----------------
+;  [ Theme Popup ]
+; -----------------
+
+*Popup "Erebus Config" !New !PopupErebusConfig
+	;  [ Global Settings ]
+	; ---------------------
+	*Popup "Global" Folder
+		*Popup "Shadows" Folder
+			*Popup "On"			!Execute [!erbSetOption erbShadows "shadows"][!Recycle]
+			*Popup "Off"		!Execute [!erbSetOption erbShadows "noshadows"][!Recycle]
+		*Popup ~Folder
+	*Popup ~Folder
+	
+	
+	;  [ Popup Settings ]
+	; --------------------
+	*Popup "Popup" Folder
+		*Popup "Font Color" Folder
+			*Popup "Orange"		!Execute [!erbSetOption erbPopupColor $erbLightOrange$][!erbSetOption erbPopupColorActive $erbOrange$][!SetEvar xPopupFontColor $erbLightOrange$][!SetEvar xPopupActiveEntryFontColor $erbOrange$][!PopupRescan]
+			*Popup "Red"		!Execute [!erbSetOption erbPopupColor $erbLightRed$][!erbSetOption erbPopupColorActive $erbRed$][!SetEvar xPopupFontColor $erbLightRed$][!SetEvar xPopupActiveEntryFontColor $erbRed$][!PopupRescan]
+		*Popup ~Folder
+		
+		*Popup "Separator Style" Folder
+			*Popup "Space"		!Execute [!erbSetOption erbPopupSeparatorStyle "1"][!erbSetOption erbPopupSeparatorHeight 21][!SetEvar xPopupSeparatorImage "popup/popupSeparator1.png"][!SetEvar xPopupSeparatorHeight 21][!PopupRescan]
+			*Popup "Line"		!Execute [!erbSetOption erbPopupSeparatorStyle "2"][!erbSetOption erbPopupSeparatorHeight 16][!SetEvar xPopupSeparatorImage "popup/popupSeparator2.png"][!SetEvar xPopupSeparatorHeight 16][!PopupRescan]
+			*Popup "akka"		!Execute [!erbSetOption erbPopupSeparatorStyle "3"][!erbSetOption erbPopupSeparatorHeight 16][!SetEvar xPopupSeparatorImage "popup/popupSeparator3.png"][!SetEvar xPopupSeparatorHeight 16][!PopupRescan]
+		*Popup ~Folder
+	*Popup ~Folder
+	
+	
+	;  [ Sys Tray Settings ]
+	; -----------------------
+	*Popup "Sys Tray" Folder
+		*Popup "Desaturate Icons" Folder
+			*Popup "On"			!Execute [!erbSetOption erbSysTraySaturation 0][!xTrayRefresh xTrayIconSaturationIntensity 0]
+			*Popup "Off"		!Execute [!erbSetOption erbSysTraySaturation 100][!xTrayRefresh xTrayIconSaturationIntensity 100]
+		*Popup ~Folder
+	*Popup ~Folder
+	
+	
+	;  [ Widget Settings ]
+	; ---------------------
+	*Popup "Widgets" Folder
+		;    [ Stats     ]
+		*Popup "Stats" Folder
+			*Popup "Start Hidden" Folder
+				*Popup "On"			!Execute [!erbSetOption erbStatsStartHidden true][!LabelHide erbWeather][!LabelHide erbNet][!xStatsGraphHide erbNetOutGraph][!xStatsGraphHide erbNetInGraph]
+				*Popup "Off"		!Execute [!erbSetOption erbStatsStartHidden false][!LabelShow erbWeather][!LabelShow erbNet][!xStatsGraphShow erbNetOutGraph][!xStatsGraphShow erbNetInGraph]
+			*Popup ~Folder
+		*Popup ~Folder
+		
+		;    [ Album Art ]
+		*Popup "Album Art" Folder
+			*Popup "Enable"			!Execute [!erbSetOption erbAlbumArtEnabled true][!erbShowAlbumArt]
+			*Popup "Disable"		!Execute [!erbSetOption erbAlbumArtEnabled false][!erbHideAlbumArt]
+		*Popup ~Folder
+	*Popup ~Folder
+*Popup ~New
