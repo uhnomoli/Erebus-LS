@@ -38,8 +38,8 @@ erbShadows						"shadows"
 ;  [ Popup Settings ]
 ; --------------------
 
-erbPopupColor					$erbLightRed$
-erbPopupColorActive				$erbRed$
+erbPopupColor					$erbLightOrange$
+erbPopupColorActive				$erbOrange$
 
 ; NOTE: 1 = "Space"   21 height
 ;       2 = "Line"    16 height
