@@ -39,7 +39,6 @@ Include										"$ConfigDir$themeVars.rc"
 *NetLoadModule								xstatsclass-1.1.5
 
 
-*NetLoadModule								jdesk-0.75
 *NetLoadModule								xpopup-2.1
 *NetLoadModule								xtray-2.2.2
 *NetLoadModule								xtaskbar-2.3.2
@@ -50,6 +49,7 @@ Include										"$ConfigDir$themeVars.rc"
 *NetLoadModule								lsxcommand-2.0.2
 *NetLoadModule								zorder-0.2
 *NetLoadModule								mzscript-1.0.3
+*NetLoadModule								jdesk-0.75
 
 
 ; ----------------
