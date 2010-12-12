@@ -152,7 +152,6 @@ xTaskbarHeight								33
 
 xTaskbarAlphaMap							true
 xTaskbarShowIcon							false
-xTaskbarShowHoverState						true
 xTaskbarShowActiveState						true
 xTaskbarUseFlashingState					true
 
