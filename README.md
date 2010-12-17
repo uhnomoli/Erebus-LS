@@ -115,4 +115,4 @@ _Bold signifies the default setting._
 [16]: http://merlinthered.deviantart.com/art/plain-weather-icons-157162192
 [17]: http://github.com/Anomareh/Erebus-LS/raw/master/Extras/Screens/full.jpg
 
-[100]: http://github.com/Anomareh/Erebus-LS/raw/master/Extras/Screens/thumb.jpg
+[100]: https://github.com/Anomareh/Erebus-LS/raw/master/Extras/Screens/thumb.jpg
