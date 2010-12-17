@@ -94,7 +94,7 @@ _Bold signifies the default setting._
 
 ### Preview
 
-[![Preview](http://github.com/Anomareh/Erebus-LS/raw/master/Extras/Screens/thumb.jpg)][17]
+[![Preview][100]][17]
 
 
 [1]: http://www.litestep.net/
@@ -114,3 +114,5 @@ _Bold signifies the default setting._
 [15]: http://prax-08.deviantart.com/art/Boolean-1-1-166457851
 [16]: http://merlinthered.deviantart.com/art/plain-weather-icons-157162192
 [17]: http://github.com/Anomareh/Erebus-LS/raw/master/Extras/Screens/full.jpg
+
+[100]: http://github.com/Anomareh/Erebus-LS/raw/master/Extras/Screens/thumb.jpg
