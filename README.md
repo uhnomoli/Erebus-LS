@@ -89,7 +89,7 @@ _Bold signifies the default setting._
     + [Tango][14] by Tango Desktop Project
     + [Boolean 1.1][15] _(recycle bin)_ by PraX-08
 + __Weather Icons__
-    + [Simple Weather Icons][16] by MerlinTheRed
+    + [Plain Weather Icons][16] by MerlinTheRed
 
 
 ### Preview
