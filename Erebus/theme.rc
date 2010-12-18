@@ -3,7 +3,7 @@
 ;  [ Theme     ] : Erebus
 ;  [ Author    ] : Andrew Fricke (Anomareh)
 ;  [ Website   ] : http://www.mirroredwhite.com/
-;  [ Source    ] : http://github.com/Anomareh/Erebus-LS
+;  [ Source    ] : https://github.com/Anomareh/Erebus-LS
 ;  [ Thanks To ] : Greywool and alurcard2 in #litestep
 ;                  Everyone I pestered in #pixelfuckers
 ;
@@ -449,7 +449,7 @@ erbClockFontBorders							21 36 0 1
 erbClockPaintingMode						".image"
 erbClockImage								"clock.png"
 erbClockImageEdges							21 36 0 0
-erbClockText								"[time('h')]<font color=#$erbLightRed$>:</font>[time('nn')] <font color=#$erbLightRed$>[time('AM/PM')]</font> <font color=#$erbRed$>¬</font> <font color=#$erbLightRed$>[date('ddd')]</font> [date('mm')]<font color=#$erbLightRed$>/</font>[date('dd')]"
+erbClockText								"[time('h')]<font color=#$erbLightRed$>:</font>[time('nn')] <font color=#$erbLightRed$>[time('AM/PM')]</font> <font color=#$erbRed$>?</font> <font color=#$erbLightRed$>[date('ddd')]</font> [date('mm')]<font color=#$erbLightRed$>/</font>[date('dd')]"
 
 *erbClockOnLeftClickRegion					10 3 109 27 !xTrayToggle
 *erbClockOnLeftClickRegion					119 6 22 21 !Execute [!LabelToggle erbWeather][!LabelToggle erbNet][!xStatsGraphToggle erbNetOutGraph][!xStatsGraphToggle erbNetInGraph]
