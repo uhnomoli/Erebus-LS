@@ -1,9 +1,9 @@
 ; ------------------------------------------------------
 ;
 ;  [ Theme     ] : Erebus
-;  [ Author    ] : Andrew Fricke (Anomareh)
-;  [ Website   ] : http://www.mirroredwhite.com/
-;  [ Source    ] : https://github.com/Anomareh/Erebus-LS
+;  [ Author    ] : Andrew Fricke (uhnomoli)
+;  [ Website   ] : https://uhnomoli.com/
+;  [ Source    ] : https://github.com/uhnomoli/Erebus-LS
 ;  [ Thanks To ] : Greywool and alurcard2 in #litestep
 ;                  Everyone I pestered in #pixelfuckers
 ;
@@ -15,7 +15,7 @@
 ; ---------------------
 
 ThemeName									"Erebus"
-ThemeAuthor									"Andrew Fricke (Anomareh)"
+ThemeAuthor									"Andrew Fricke (uhnomoli)"
 
 OTSMajorVersion								2
 OTSMinorVersion								0

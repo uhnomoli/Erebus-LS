@@ -98,7 +98,7 @@ _Bold signifies the default setting._
 
 
 [1]: http://www.litestep.net/
-[2]: http://github.com/Anomareh/Erebus.tmTheme
+[2]: http://github.com/uhnomoli/Erebus.tmTheme
 [3]: http://pixelfuckers.org/
 [4]: http://www.ls-universe.ls-themes.org/comment.php?comment.news.550
 [5]: http://dl.dropbox.com/u/51925/LiteStep/jDesk-0.75.zip
@@ -113,6 +113,7 @@ _Bold signifies the default setting._
 [14]: http://tango.freedesktop.org/
 [15]: http://prax-08.deviantart.com/art/Boolean-1-1-166457851
 [16]: http://merlinthered.deviantart.com/art/plain-weather-icons-157162192
-[17]: http://github.com/Anomareh/Erebus-LS/raw/master/Extras/Screens/full.jpg
+[17]: http://github.com/uhnomoli/Erebus-LS/raw/master/Extras/Screens/full.jpg
 
-[100]: https://github.com/Anomareh/Erebus-LS/raw/master/Extras/Screens/thumb.jpg
+[100]: https://github.com/uhnomoli/Erebus-LS/raw/master/Extras/Screens/thumb.jpg
+
